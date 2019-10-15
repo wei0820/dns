@@ -31,4 +31,8 @@
     <string name="account_id">107593</string>
     <string name="error_msg_not_network">糟糕，无法连接到服务器。 \n请您检测网络是否异常。\n可切换网络，如WiFi切换成4G。</string>
     <string name="error_msg_other">糟糕，无法连接到服务器。 \n可能是服务器出现问题。\n请确保网络可用。\n或者重新启动应用。</string>
+
+    <string name="appid">65126154830b7</string>
+    <string name="secretkey">786859cb04ff2871188b85f800380965</string>
+
 </resources>
