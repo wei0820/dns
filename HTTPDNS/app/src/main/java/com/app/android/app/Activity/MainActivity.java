@@ -981,22 +981,22 @@ public class MainActivity extends Activity {
         });
     }
 
-    private  void  test(){
-        XGPushConfig.enableDebug(this,true);
+    private void test() {
+        XGPushConfig.enableDebug(this, true);
         XGPushConfig.enableOtherPush(getApplicationContext(), true);
         XGPushConfig.setHuaweiDebug(true);
         XGPushConfig.setMiPushAppId(getApplicationContext(), getResources().getString(R.string.appid));
         XGPushConfig.setMiPushAppKey(getApplicationContext(), getResources().getString(R.string.secretkey));
-        XGPushConfig.setMzPushAppId(this,  getResources().getString(R.string.appid));
+        XGPushConfig.setMzPushAppId(this, getResources().getString(R.string.appid));
         XGPushConfig.setMzPushAppKey(this, getResources().getString(R.string.secretkey));
 
 
         XGPushManager.registerPush(this, new XGIOperateCallback() {
             @Override
             public void onSuccess(Object data, int flag) {
-//token在设备卸载重装的时候有可能会变
                 Log.d("TPush", "注册成功，设备token为：" + data);
             }
+
             @Override
             public void onFail(Object data, int errCode, String msg) {
                 Log.d("TPush", "注册失败，错误码：" + errCode + ",错误信息：" + msg);
