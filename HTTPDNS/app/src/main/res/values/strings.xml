@@ -1,0 +1,34 @@
+<resources>
+    <!--
+        测试地址  : http://gate5188.upin518.com:8006/api/GetApp?appid=fkk10jwom9yrpsdbmg8p2lbnvqh99qg2
+
+        第一彩票  113179 : http://gate5188.upin518.com:8006/api/GetApp?appid=t1d02m4fqi9l8gni544ge3buriqoyznkd1
+        凤凰彩票  113179 : http://gate5188.upin518.com:8006/api/GetApp?appid=7gq5x57yldjl186k0enc9s8zlyzslzqikfh
+
+
+        瑞彩祥云Ⅰ 107593 : http://gate58888rc.securefastestapp.com:8006/api/GetApp?appid=ddkful6fpk1dmig3swfk0s9fsw31rxqa
+        瑞彩祥云Ⅱ 113179 : http://gate5188.upin518.com:8006/api/GetApp?appid=veo4udrdn4u7egn6bf52uknt492ghd44rc02
+        瑞彩祥云Ⅲ 113179 : http://gate5188.upin518.com:8006/api/GetApp?appid=rcby2qhqb3gwasu6le0x2oirbb16tkf3b9
+
+        购彩Ⅳ    107593 : http://gate58888rc.securefastestapp.com:8006/api/GetApp?appid=gcbsu6le0x2oirbb16ty2qhqb3gwakf366
+        购彩Ⅴ    113179 : http://gate5188.upin518.com:8006/api/GetApp?appid=go005pj09d0hhhjk1rsj1hx08q011q4n41j73
+
+        购彩XS   113179 : http://gate5188.upin518.com:8006/api/GetApp?appid=go100asdjlasdashdkjasdhkajsdzxcasdasandroid
+        购彩XI   113179 : http://gate5188.upin518.com:8006/api/GetApp?appid=gocaixi23213asdasdzxcasdasdhkja
+        购彩XR   113179 : http://gate5188.upin518.com:8006/api/GetApp?appid=gocaixr2asd3asdacasdsdasdhkja
+        购彩XV   113179 : http://gate5188.upin518.com:8006/api/GetApp?appid=gocaixv312asdasdasdasfadfa
+
+        瑞彩祥云X 113179 : http://gate5188.upin518.com:8006/api/GetApp?appid=rcxyx231asdasdasfdsfasdasdasdasfdsaasd
+
+        购彩X20   113179 : http://asdasddasasdasd.upin518.com:8006/api/GetApp?appid=goucaix20asdasdijijijijjijiji
+
+    -->
+    <string name="app_name">购彩Ⅳ</string>
+    <string name="root_path">
+        http://gate58888rc.securefastestapp.com:8006/api/GetApp?appid=gcbsu6le0x2oirbb16ty2qhqb3gwakf366
+    </string>
+    <!--  113179   107593 -->
+    <string name="account_id">107593</string>
+    <string name="error_msg_not_network">糟糕，无法连接到服务器。 \n请您检测网络是否异常。\n可切换网络，如WiFi切换成4G。</string>
+    <string name="error_msg_other">糟糕，无法连接到服务器。 \n可能是服务器出现问题。\n请确保网络可用。\n或者重新启动应用。</string>
+</resources>

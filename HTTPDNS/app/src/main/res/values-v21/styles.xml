@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar.Fullscreen">
+        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/status_color</item>
+        <item name="android:windowBackground">@color/status_color</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+</resources>

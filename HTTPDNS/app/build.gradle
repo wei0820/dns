@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+apply plugin: 'bugly'
+bugly {
+    appId = '4e1d55a7fb' // 注册时分配的App ID
+    appKey = 'eb2d10b8-745e-44e1-8491-3464761990a2' // 注册时分配的App Key
+    debug = true
+}
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        /*
+            com.app.android.test001
+
+            com.app.android.dy01
+            com.app.android.fh01
+
+            com.app.android.rc01
+            com.app.android.rc02
+            com.app.android.rc03
+
+            com.app.android.gc04
+            com.app.android.gc05
+
+            com.app.android.gcxs
+            com.app.android.gcxi
+            com.app.android.gcxr
+            com.app.android.gcxv
+            com.app.android.rcx
+
+            com.app.android.gcx20
+
+        */
+        applicationId "com.app.android.gc04"
+        minSdkVersion 19
+        targetSdkVersion 24
+        versionCode 25
+        versionName "1.0.25"
+        flavorDimensions "versionCode"
+        //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+
+        }
+
+        ndk {
+            // 设置支持的库架构
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.github.chrisbanes:PhotoView:2.1.4'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    //implementation files('libs/tbs_sdk.jar')
+    /*implementation('com.aliyun.ams:alicloud-android-httpdns:1.0.11', {
+                                exclude module: 'alicloud-android-utdid'
+                            })*/
+    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+    implementation 'com.android.support:support-v4:27.1.1'
+    //implementation(name: 'support-v4-27.0.2', ext: 'aar')
+    implementation files('libs/tbs_sdk.jar')
+}
