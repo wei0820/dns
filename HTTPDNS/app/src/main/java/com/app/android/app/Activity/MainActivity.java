@@ -34,6 +34,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -496,7 +497,7 @@ public class MainActivity extends Activity {
             }
         });
         //mWebView.loadUrl("http://52.175.50.221");
-        //mWebView.loadUrl("http://2fhc.com");
+        mWebView.loadUrl("http://m.kfcs123.com/index");
     }
 
     private void webviewGoBack() {
@@ -994,7 +995,9 @@ public class MainActivity extends Activity {
         XGPushManager.registerPush(this, new XGIOperateCallback() {
             @Override
             public void onSuccess(Object data, int flag) {
-                Log.d("TPush", "注册成功，设备token为：" + data);
+                Log.d("", "注册成功，设备token为：" + data);
+                mWebView.loadUrl("javascript:setToken('"+data+"')");
+
             }
 
             @Override
@@ -1004,6 +1007,7 @@ public class MainActivity extends Activity {
         });
 
     }
+
 }
 
 
