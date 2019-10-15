@@ -29,7 +29,7 @@ public class GetHttpRequest extends Thread {
         try {
             url = new URL(urlPath);
             connection = (HttpURLConnection) url.openConnection();
-            connection.setConnectTimeout(10000);
+            connection.setConnectTimeout(10 * 1000);
             inputStream = connection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));//转成utf-8格式
             StringBuilder response = new StringBuilder();

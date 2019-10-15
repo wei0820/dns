@@ -31,6 +31,7 @@ import android.support.v4.content.ContextCompat;
 
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.ValueCallback;
@@ -55,6 +56,9 @@ import com.app.android.app.Common.OnCallbackListener;
 import com.app.android.app.Dialog.DialogConfirm;
 import com.app.android.app.R;
 import com.google.gson.Gson;
+import com.tencent.android.tpush.XGIOperateCallback;
+import com.tencent.android.tpush.XGPushConfig;
+import com.tencent.android.tpush.XGPushManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -134,6 +138,7 @@ public class MainActivity extends Activity {
         gotoWebViewDoStart();
         setupDialog();
         setupWebView();
+        test();
     }
 
 
@@ -974,6 +979,30 @@ public class MainActivity extends Activity {
                 Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private  void  test(){
+        XGPushConfig.enableDebug(this,true);
+        XGPushConfig.enableOtherPush(getApplicationContext(), true);
+        XGPushConfig.setHuaweiDebug(true);
+        XGPushConfig.setMiPushAppId(getApplicationContext(), "65126154830b7");
+        XGPushConfig.setMiPushAppKey(getApplicationContext(), "786859cb04ff2871188b85f800380965");
+        XGPushConfig.setMzPushAppId(this, "65126154830b7");
+        XGPushConfig.setMzPushAppKey(this, "786859cb04ff2871188b85f800380965");
+
+
+        XGPushManager.registerPush(this, new XGIOperateCallback() {
+            @Override
+            public void onSuccess(Object data, int flag) {
+//token在设备卸载重装的时候有可能会变
+                Log.d("TPush", "注册成功，设备token为：" + data);
+            }
+            @Override
+            public void onFail(Object data, int errCode, String msg) {
+                Log.d("TPush", "注册失败，错误码：" + errCode + ",错误信息：" + msg);
+            }
+        });
+
     }
 }
 
