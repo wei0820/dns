@@ -985,10 +985,10 @@ public class MainActivity extends Activity {
         XGPushConfig.enableDebug(this,true);
         XGPushConfig.enableOtherPush(getApplicationContext(), true);
         XGPushConfig.setHuaweiDebug(true);
-        XGPushConfig.setMiPushAppId(getApplicationContext(), "65126154830b7");
-        XGPushConfig.setMiPushAppKey(getApplicationContext(), "786859cb04ff2871188b85f800380965");
-        XGPushConfig.setMzPushAppId(this, "65126154830b7");
-        XGPushConfig.setMzPushAppKey(this, "786859cb04ff2871188b85f800380965");
+        XGPushConfig.setMiPushAppId(getApplicationContext(), getResources().getString(R.string.appid));
+        XGPushConfig.setMiPushAppKey(getApplicationContext(), getResources().getString(R.string.secretkey));
+        XGPushConfig.setMzPushAppId(this,  getResources().getString(R.string.appid));
+        XGPushConfig.setMzPushAppKey(this, getResources().getString(R.string.secretkey));
 
 
         XGPushManager.registerPush(this, new XGIOperateCallback() {
