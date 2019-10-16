@@ -31,8 +31,10 @@ import android.support.v4.content.ContextCompat;
 
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -55,6 +57,9 @@ import com.app.android.app.Common.OnCallbackListener;
 import com.app.android.app.Dialog.DialogConfirm;
 import com.app.android.app.R;
 import com.google.gson.Gson;
+import com.tencent.android.tpush.XGIOperateCallback;
+import com.tencent.android.tpush.XGPushConfig;
+import com.tencent.android.tpush.XGPushManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -121,6 +126,7 @@ public class MainActivity extends Activity {
             finish();
             return;
         }
+        test();
 
         setupLoading();
         mContext = this;
@@ -130,10 +136,12 @@ public class MainActivity extends Activity {
         checkPermission();
         //QbSdk.initX5Environment(getApplicationContext(), null);
         initWakeLock();
-        setupMessageBox();
-        gotoWebViewDoStart();
+//        setupMessageBox();
+//        gotoWebViewDoStart();
         setupDialog();
         setupWebView();
+
+
     }
 
 
@@ -402,6 +410,10 @@ public class MainActivity extends Activity {
 
 
                 LogUtils.out("onPageFinished   url = " + mWebView.getUrl());
+                mWebView.loadUrl("javascript:setToken('" + url + "')");
+                mWebView.addJavascriptInterface(new JavaScriptinterface(getApplication(),mWebView),"onSumResult");
+
+
             }
 
 
@@ -491,7 +503,9 @@ public class MainActivity extends Activity {
             }
         });
         //mWebView.loadUrl("http://52.175.50.221");
-        //mWebView.loadUrl("http://2fhc.com");
+        mWebView.loadUrl("http://m.kfcs123.com/index");
+
+
     }
 
     private void webviewGoBack() {
@@ -975,6 +989,49 @@ public class MainActivity extends Activity {
             }
         });
     }
+    private String data = "";
+    private void test() {
+        XGPushConfig.enableDebug(this, true);
+        XGPushConfig.enableOtherPush(getApplicationContext(), true);
+        XGPushConfig.setHuaweiDebug(true);
+        XGPushConfig.setMiPushAppId(getApplicationContext(), getResources().getString(R.string.appid));
+        XGPushConfig.setMiPushAppKey(getApplicationContext(), getResources().getString(R.string.secretkey));
+        XGPushConfig.setMzPushAppId(this, getResources().getString(R.string.appid));
+        XGPushConfig.setMzPushAppKey(this, getResources().getString(R.string.secretkey));
+
+
+        XGPushManager.registerPush(this, new XGIOperateCallback() {
+            @Override
+            public void onSuccess(Object data, int flag) {
+                Log.d("", "注册成功，设备token为：" + data);
+                data = data;
+
+            }
+
+            @Override
+            public void onFail(Object data, int errCode, String msg) {
+                Log.d("TPush", "注册失败，错误码：" + errCode + ",错误信息：" + msg);
+            }
+        });
+
+    }
+
+    private static final String TAG = "MainActivity";
+    public class JavaScriptinterface {
+        Context context;
+
+        public JavaScriptinterface(Context c, WebView mWebView) {
+            context = c;
+        }
+
+        @JavascriptInterface
+        public void onSumResult() {
+            Log.d(TAG, "onSumResult: ");
+            Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
 }
 
 
