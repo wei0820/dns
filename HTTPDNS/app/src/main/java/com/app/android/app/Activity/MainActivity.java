@@ -410,8 +410,7 @@ public class MainActivity extends Activity {
 
 
                 LogUtils.out("onPageFinished   url = " + mWebView.getUrl());
-                LogUtils.out("onPageFinished   url = " +data);
-                mWebView.loadUrl("javascript:setToken('"+1+"')");
+                mWebView.loadUrl("javascript:setToken('" + url + "')");
                 mWebView.addJavascriptInterface(new JavaScriptinterface(getApplication(),mWebView),"onSumResult");
 
 
