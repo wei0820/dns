@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
+import com.app.android.app.Bean.MySharedPrefernces;
 import com.app.android.app.R;
 import com.tencent.android.tpush.XGIOperateCallback;
 import com.tencent.android.tpush.XGPushConfig;
@@ -29,7 +30,7 @@ public class MyApp extends Application {
         //CrashReport.initCrashReport(getApplicationContext(), "4e1d55a7fb", false);
         Bugly.init(getApplicationContext(), "4e1d55a7fb", true);
         closeAndroidPDialog();
-        test();
+        getToken();
 
     }
     public boolean isMainProcess() {
@@ -67,7 +68,7 @@ public class MyApp extends Application {
 
     }
 
-    private void test() {
+    private void getToken() {
         XGPushConfig.enableDebug(this, true);
         XGPushConfig.enableOtherPush(getApplicationContext(), true);
         XGPushConfig.setHuaweiDebug(true);
@@ -81,8 +82,7 @@ public class MyApp extends Application {
             @Override
             public void onSuccess(Object data, int flag) {
                 Log.d("TPush", "注册成功，设备token为：" + data);
-                data = data;
-
+                MySharedPrefernces.saveToken(getApplicationContext(),data.toString());
             }
 
             @Override
