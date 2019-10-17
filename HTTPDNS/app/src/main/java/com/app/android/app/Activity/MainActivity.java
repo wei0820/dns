@@ -126,8 +126,6 @@ public class MainActivity extends Activity {
             finish();
             return;
         }
-        test();
-
         setupLoading();
         mContext = this;
         mRootUrl = getResources().getString(R.string.root_path);
@@ -410,7 +408,7 @@ public class MainActivity extends Activity {
 
 
                 LogUtils.out("onPageFinished   url = " + mWebView.getUrl());
-                mWebView.loadUrl("javascript:setToken('" + url + "')");
+//                mWebView.loadUrl("javascript:setToken('" + url + "')");
                 mWebView.addJavascriptInterface(new JavaScriptinterface(getApplication(),mWebView),"onSumResult");
 
 
@@ -990,31 +988,7 @@ public class MainActivity extends Activity {
         });
     }
     private String data = "";
-    private void test() {
-        XGPushConfig.enableDebug(this, true);
-        XGPushConfig.enableOtherPush(getApplicationContext(), true);
-        XGPushConfig.setHuaweiDebug(true);
-        XGPushConfig.setMiPushAppId(getApplicationContext(), getResources().getString(R.string.appid));
-        XGPushConfig.setMiPushAppKey(getApplicationContext(), getResources().getString(R.string.secretkey));
-        XGPushConfig.setMzPushAppId(this, getResources().getString(R.string.appid));
-        XGPushConfig.setMzPushAppKey(this, getResources().getString(R.string.secretkey));
 
-
-        XGPushManager.registerPush(this, new XGIOperateCallback() {
-            @Override
-            public void onSuccess(Object data, int flag) {
-                Log.d("", "注册成功，设备token为：" + data);
-                data = data;
-
-            }
-
-            @Override
-            public void onFail(Object data, int errCode, String msg) {
-                Log.d("TPush", "注册失败，错误码：" + errCode + ",错误信息：" + msg);
-            }
-        });
-
-    }
 
     private static final String TAG = "MainActivity";
     public class JavaScriptinterface {

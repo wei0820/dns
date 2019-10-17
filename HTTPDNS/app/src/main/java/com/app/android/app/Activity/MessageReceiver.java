@@ -48,6 +48,8 @@ public class MessageReceiver extends XGPushBaseReceiver {
         NotificationService.getInstance(context).save(notific);
         context.sendBroadcast(intent);
         show(context, "您有1条新消息, " + "通知被展示 ， " + notifiShowedRlt.toString());
+        Log.d("LC", notifiShowedRlt.toString());
+
         Log.d("LC", "+++++++++++++++++++++++++++++展示通知的回调");
     }
 
@@ -102,6 +104,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 
     }
 
+    private static final String TAG = "MessageReceiver";
     // 通知点击回调 actionType=1为该消息被清除，actionType=0为该消息被点击。此处不能做点击消息跳转，详细方法请参照官网的Android常见问题文档
     @Override
     public void onNotifactionClickedResult(Context context,
@@ -119,6 +122,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
             // APP自己处理点击的相关动作
             // 这个动作可以在activity的onResume也能监听，请看第3点相关内容
             text = "通知被打开 :" + message;
+            Log.d(TAG, "onNotifactionClickedResult: "+message);
         } else if (message.getActionType() == XGPushClickedResult.NOTIFACTION_DELETED_TYPE) {
             // 通知被清除啦。。。。
             // APP自己处理通知被清除后的相关动作
