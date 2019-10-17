@@ -988,9 +988,6 @@ public class MainActivity extends Activity {
         });
     }
 
-    private String data = "";
-
-
     private static final String TAG = "MainActivity";
 
     public class JavaScriptinterface {
