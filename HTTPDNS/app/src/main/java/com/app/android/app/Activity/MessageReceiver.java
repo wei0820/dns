@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.app.android.app.Bean.MySharedPrefernces;
 import com.app.android.app.Bean.XGNotification;
 import com.app.android.app.Common.NotificationService;
 import com.tencent.android.tpush.XGPushBaseReceiver;
@@ -123,6 +124,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
             // 这个动作可以在activity的onResume也能监听，请看第3点相关内容
             text = "通知被打开 :" + message;
             Log.d(TAG, "onNotifactionClickedResult: "+message);
+            MySharedPrefernces.saveCustomcontent(context,message.getCustomContent());
         } else if (message.getActionType() == XGPushClickedResult.NOTIFACTION_DELETED_TYPE) {
             // 通知被清除啦。。。。
             // APP自己处理通知被清除后的相关动作
@@ -163,6 +165,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
             text = message + "注册成功";
             // 在这里拿token
             String token = message.getToken();
+            MySharedPrefernces.saveToken(context,token);
         } else {
             text = message + "注册失败错误码：" + errorCode;
         }
