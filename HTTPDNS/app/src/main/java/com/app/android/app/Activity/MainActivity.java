@@ -1006,16 +1006,19 @@ public class MainActivity extends Activity {
     }
 
     private void setToken() {
-        String token = MySharedPrefernces.getToken(getApplicationContext());
-        mWebView.loadUrl("javascript:setToken('" + token + "')");
+        if (mWebView!=null){
+            String token = MySharedPrefernces.getToken(getApplicationContext());
+            mWebView.loadUrl("javascript:setToken('" + token + "')");
+        }
+
 
     }
 
     private void setCustomContent() {
-        String customContent = MySharedPrefernces.getCustomcontent(getApplicationContext());
-        mWebView.loadUrl("javascript:setCustomContent('" + customContent + "')");
-
-
+        if (mWebView!=null){
+            String customContent = MySharedPrefernces.getCustomcontent(getApplicationContext());
+            mWebView.loadUrl("javascript:setCustomContent('" + customContent + "')");
+        }
     }
 }
 
