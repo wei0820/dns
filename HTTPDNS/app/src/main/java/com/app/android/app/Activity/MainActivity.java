@@ -50,6 +50,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.android.app.Bean.AliyunDNSBean;
+import com.app.android.app.Bean.MySharedPrefernces;
 import com.app.android.app.Common.GetHttpRequest;
 import com.app.android.app.Common.LogUtils;
 import com.app.android.app.Common.NetworkUtils;
@@ -408,8 +409,7 @@ public class MainActivity extends Activity {
 
 
                 LogUtils.out("onPageFinished   url = " + mWebView.getUrl());
-//                mWebView.loadUrl("javascript:setToken('" + url + "')");
-                mWebView.addJavascriptInterface(new JavaScriptinterface(getApplication(),mWebView),"onSumResult");
+                mWebView.addJavascriptInterface(new JavaScriptinterface(getApplication(), mWebView), "onSumResult");
 
 
             }
@@ -987,10 +987,12 @@ public class MainActivity extends Activity {
             }
         });
     }
+
     private String data = "";
 
 
     private static final String TAG = "MainActivity";
+
     public class JavaScriptinterface {
         Context context;
 
@@ -1006,6 +1008,18 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void setToken() {
+        String token = MySharedPrefernces.getToken(getApplicationContext());
+        mWebView.loadUrl("javascript:setToken('" + token + "')");
+
+    }
+
+    private void setCustomContent() {
+        String customContent = MySharedPrefernces.getCustomcontent(getApplicationContext());
+        mWebView.loadUrl("javascript:setCustomContent('" + customContent + "')");
+
+
+    }
 }
 
 
