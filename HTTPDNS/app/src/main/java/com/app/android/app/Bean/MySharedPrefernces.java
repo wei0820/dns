@@ -32,4 +32,9 @@ public class MySharedPrefernces {
         return sp.getString(KEY_CUSTOMCONTENT, "");
     }
 
+    public static void clearSharedPrefernces(Context context){
+        saveToken(context,"");
+        saveCustomcontent(context,"");
+    }
+
 }

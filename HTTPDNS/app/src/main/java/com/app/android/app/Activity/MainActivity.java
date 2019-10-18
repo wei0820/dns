@@ -409,9 +409,9 @@ public class MainActivity extends Activity {
 
 
                 LogUtils.out("onPageFinished   url = " + mWebView.getUrl());
-                mWebView.addJavascriptInterface(new JavaScriptinterface(getApplication(), mWebView), "onSumResult");
 
-
+                setToken();
+                setCustomContent();
             }
 
 
@@ -1006,18 +1006,29 @@ public class MainActivity extends Activity {
     }
 
     private void setToken() {
-        if (mWebView!=null){
+        if (mWebView != null) {
             String token = MySharedPrefernces.getToken(getApplicationContext());
-            mWebView.loadUrl("javascript:setToken('" + token + "')");
+            if (!token.isEmpty()) {
+                Log.d(TAG, "setToken: " + token);
+                mWebView.loadUrl("javascript:setToken('" + token + "')");
+                MySharedPrefernces.clearSharedPrefernces(getApplicationContext());
+            }
+
         }
 
 
     }
 
     private void setCustomContent() {
-        if (mWebView!=null){
+        if (mWebView != null) {
             String customContent = MySharedPrefernces.getCustomcontent(getApplicationContext());
-            mWebView.loadUrl("javascript:setCustomContent('" + customContent + "')");
+            if (!customContent.isEmpty()) {
+                Log.d(TAG, "setCustomContent: " + customContent);
+                mWebView.loadUrl("javascript:setCustomContent('" + customContent + "')");
+                MySharedPrefernces.clearSharedPrefernces(getApplicationContext());
+            }
+
+
         }
     }
 }
