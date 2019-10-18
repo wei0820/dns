@@ -9,7 +9,6 @@ public class MySharedPrefernces {
 
     public static final String KEY_TOKEN = "token";
 
-
     public static  void saveToken(Context context, String token){
         SharedPreferences sp = context.getSharedPreferences(NAME, Activity.MODE_PRIVATE);
         sp.edit().putString(KEY_TOKEN, token).apply();
@@ -33,7 +32,7 @@ public class MySharedPrefernces {
     }
 
     public static void clearSharedPrefernces(Context context){
-//        saveToken(context,"");
+        saveToken(context,"");
         saveCustomcontent(context,"");
     }
 
