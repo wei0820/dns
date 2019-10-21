@@ -411,8 +411,6 @@ public class MainActivity extends Activity {
                 }
 
                 Log.d(TAG, "onPageFinished: "+ mWebView.getUrl());
-
-                setAlert();
                 setToken();
             }
 
