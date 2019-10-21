@@ -50,6 +50,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.android.app.Bean.AliyunDNSBean;
+import com.app.android.app.Bean.CustomContentData;
 import com.app.android.app.Bean.MySharedPrefernces;
 import com.app.android.app.Common.GetHttpRequest;
 import com.app.android.app.Common.LogUtils;
@@ -110,7 +111,7 @@ public class MainActivity extends Activity {
     private ProgressBar mProgressBar;
     private String mStrUrlSubstring = "";
     private RelativeLayout mLayout;
-
+    private final String URL = "http://m.kfcs123.com/index";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -407,11 +408,10 @@ public class MainActivity extends Activity {
                     mStrMainUrl = mWebView.getUrl();
                 }
 
+                Log.d(TAG, "onPageFinished: "+ mWebView.getUrl());
 
-                LogUtils.out("onPageFinished   url = " + mWebView.getUrl());
-
+                setAlert();
                 setToken();
-                setCustomContent();
             }
 
 
@@ -501,7 +501,7 @@ public class MainActivity extends Activity {
             }
         });
         //mWebView.loadUrl("http://52.175.50.221");
-        mWebView.loadUrl("http://m.kfcs123.com/index");
+        mWebView.loadUrl(URL);
 
 
     }
@@ -908,6 +908,7 @@ public class MainActivity extends Activity {
         if (wakeLock != null) {
             wakeLock.acquire();
         }
+
     }
 
     @Override
@@ -1005,6 +1006,11 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void setAlert(){
+        mWebView.loadUrl("javascript:setAlert()");
+
+    }
+
     private void setToken() {
         if (mWebView != null) {
             String token = MySharedPrefernces.getToken(getApplicationContext());
@@ -1019,14 +1025,13 @@ public class MainActivity extends Activity {
     }
 
     private void setCustomContent() {
-        if (mWebView != null) {
-            String customContent = MySharedPrefernces.getCustomcontent(getApplicationContext());
-            if (!customContent.isEmpty()) {
-                Log.d(TAG, "setCustomContent: " + customContent);
-                mWebView.loadUrl("javascript:setCustomContent('" + customContent + "')");
-            }
+        String customContent = MySharedPrefernces.getCustomcontent(getApplicationContext());
+        if (!customContent.isEmpty()) {
+            Log.d(TAG, "setCustomContent: " + customContent);
+            CustomContentData customContentData = new Gson().fromJson(customContent,CustomContentData.class);
 
 
+//            mWebView.loadUrl("javascript:setCustomContent('" + customContent + "')");
         }
     }
 }
