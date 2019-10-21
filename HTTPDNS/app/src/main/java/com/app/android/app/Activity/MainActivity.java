@@ -1019,7 +1019,16 @@ public class MainActivity extends Activity {
             String token = MySharedPrefernces.getToken(getApplicationContext());
             if (!token.isEmpty()) {
                 Log.d(TAG, "setToken: " + token);
-                mWebView.loadUrl("javascript:setToken('" + token + "')");
+                String jsMethodName = "javascript:setToken('" + token + "')";
+                mWebView.evaluateJavascript(jsMethodName, new ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String s) {
+                        Log.d(TAG, "onReceiveValue: "+s);
+                        if (!s.equals("0")){
+                          MySharedPrefernces.saveToken(getApplicationContext(),"");
+                        }
+                    }
+                });
             }
 
         }
