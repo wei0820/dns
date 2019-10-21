@@ -1009,11 +1009,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void setAlert(){
-        mWebView.loadUrl("javascript:setAlert()");
-
-    }
-
     private void setToken() {
         if (mWebView != null) {
             String token = MySharedPrefernces.getToken(getApplicationContext());
@@ -1057,9 +1052,6 @@ public class MainActivity extends Activity {
                         break;
                 }
             }
-
-
-//            mWebView.loadUrl("javascript:setCustomContent('" + customContent + "')");
         }
     }
 }
