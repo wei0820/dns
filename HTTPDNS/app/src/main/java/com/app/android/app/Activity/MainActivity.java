@@ -112,6 +112,8 @@ public class MainActivity extends Activity {
     private String mStrUrlSubstring = "";
     private RelativeLayout mLayout;
     private final String URL = "http://m.kfcs123.com/index";
+    private final String URL_JUMP = "http://m.kfcs123.com";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -908,6 +910,7 @@ public class MainActivity extends Activity {
         if (wakeLock != null) {
             wakeLock.acquire();
         }
+        setCustomContent();
 
     }
 
@@ -1028,7 +1031,23 @@ public class MainActivity extends Activity {
         String customContent = MySharedPrefernces.getCustomcontent(getApplicationContext());
         if (!customContent.isEmpty()) {
             Log.d(TAG, "setCustomContent: " + customContent);
+            String url = "";
             CustomContentData customContentData = new Gson().fromJson(customContent,CustomContentData.class);
+            if (customContentData!=null){
+                switch (customContentData.page){
+                    //privateLetter（私信页面） notification（消息）
+                    case "privateLetter":
+                        ///chat/user/190
+                       url = URL_JUMP+"/chat/user/"+customContentData.id;
+                        mWebView.loadUrl(url);
+                        break;
+                    case "notification":
+                        ///letter?ID=190
+                        url = URL_JUMP+"/letter?ID="+customContentData.id;
+                        mWebView.loadUrl(url);
+                        break;
+                }
+            }
 
 
 //            mWebView.loadUrl("javascript:setCustomContent('" + customContent + "')");
