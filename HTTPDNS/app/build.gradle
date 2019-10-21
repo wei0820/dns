@@ -33,7 +33,7 @@ android {
         */
         applicationId "com.app.android.gc04"
         minSdkVersion 19
-        targetSdkVersion 24
+        targetSdkVersion 26
         versionCode 25
         versionName "1.0.25"
         flavorDimensions "versionCode"
