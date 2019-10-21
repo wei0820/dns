@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'bugly'
 bugly {
-    appId = '4e1d55a7fb' // 注册时分配的App ID
-    appKey = 'eb2d10b8-745e-44e1-8491-3464761990a2' // 注册时分配的App Key
+    appId = '8c42611910' // 注册时分配的App ID
+    appKey = '76de02fb-518c-4c64-8b59-6d8fb2c9d035' // 注册时分配的App Key
     debug = true
 }
 
