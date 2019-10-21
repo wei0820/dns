@@ -28,7 +28,7 @@ public class MyApp extends Application {
         // 1: cedc38f1c4
         // 2: 4e1d55a7fb
         //CrashReport.initCrashReport(getApplicationContext(), "4e1d55a7fb", false);
-        Bugly.init(getApplicationContext(), "4e1d55a7fb", true);
+        Bugly.init(getApplicationContext(), "8c42611910", true);
         closeAndroidPDialog();
         getToken();
 

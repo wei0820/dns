@@ -34,8 +34,8 @@ android {
         applicationId "com.app.android.gc04"
         minSdkVersion 19
         targetSdkVersion 24
-        versionCode 25
-        versionName "1.0.25"
+        versionCode 24
+        versionName "1.0.24"
         flavorDimensions "versionCode"
         //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         compileOptions {
