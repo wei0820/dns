@@ -637,7 +637,7 @@ public class MainActivity extends Activity {
                 doOkHttpSecond();
             }
         } else {
-            mBoxMsg.setVisibility(View.VISIBLE);
+//            mBoxMsg.setVisibility(View.VISIBLE);
             //hideStatusBar(false);
             fullscreen(false);
         }
@@ -1011,7 +1011,6 @@ public class MainActivity extends Activity {
             if (!token.isEmpty()) {
                 Log.d(TAG, "setToken: " + token);
                 mWebView.loadUrl("javascript:setToken('" + token + "')");
-                MySharedPrefernces.clearSharedPrefernces(getApplicationContext());
             }
 
         }

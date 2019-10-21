@@ -32,7 +32,7 @@ public class MySharedPrefernces {
     }
 
     public static void clearSharedPrefernces(Context context){
-        saveToken(context,"");
+//        saveToken(context,"");
         saveCustomcontent(context,"");
     }
 
