@@ -50,8 +50,6 @@ public class MessageReceiver extends XGPushBaseReceiver {
         context.sendBroadcast(intent);
         show(context, "您有1条新消息, " + "通知被展示 ， " + notifiShowedRlt.toString());
         Log.d("LC", notifiShowedRlt.toString());
-
-        Log.d("LC", "+++++++++++++++++++++++++++++展示通知的回调");
     }
 
     //反注册的回调
@@ -123,8 +121,8 @@ public class MessageReceiver extends XGPushBaseReceiver {
             // APP自己处理点击的相关动作
             // 这个动作可以在activity的onResume也能监听，请看第3点相关内容
             text = "通知被打开 :" + message;
-            Log.d(TAG, "onNotifactionClickedResult: "+message);
             MySharedPrefernces.saveCustomcontent(context,message.getCustomContent());
+            Log.d(TAG, "onNotifactionClickedResult: "+message.getCustomContent());
         } else if (message.getActionType() == XGPushClickedResult.NOTIFACTION_DELETED_TYPE) {
             // 通知被清除啦。。。。
             // APP自己处理通知被清除后的相关动作
@@ -142,7 +140,6 @@ public class MessageReceiver extends XGPushBaseReceiver {
                     String value = obj.getString("key");
                     Log.d(LogTag, "get custom value:" + value);
                 }
-                // ...
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -193,7 +190,6 @@ public class MessageReceiver extends XGPushBaseReceiver {
                 e.printStackTrace();
             }
         }
-        Log.d("LC", "++++++++++++++++透传消息");
         // APP自主处理消息的过程...
         Log.d(LogTag, text);
         show(context, text);
