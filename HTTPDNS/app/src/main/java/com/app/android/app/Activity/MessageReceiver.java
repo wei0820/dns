@@ -50,8 +50,6 @@ public class MessageReceiver extends XGPushBaseReceiver {
         context.sendBroadcast(intent);
         show(context, "您有1条新消息, " + "通知被展示 ， " + notifiShowedRlt.toString());
         Log.d("LC", notifiShowedRlt.toString());
-
-        Log.d("LC", "+++++++++++++++++++++++++++++展示通知的回调");
     }
 
     //反注册的回调
@@ -192,7 +190,6 @@ public class MessageReceiver extends XGPushBaseReceiver {
                 e.printStackTrace();
             }
         }
-        Log.d("LC", "++++++++++++++++透传消息");
         // APP自主处理消息的过程...
         Log.d(LogTag, text);
         show(context, text);

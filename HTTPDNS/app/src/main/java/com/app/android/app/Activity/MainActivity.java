@@ -1024,7 +1024,6 @@ public class MainActivity extends Activity {
             if (!customContent.isEmpty()) {
                 Log.d(TAG, "setCustomContent: " + customContent);
                 mWebView.loadUrl("javascript:setCustomContent('" + customContent + "')");
-                MySharedPrefernces.clearSharedPrefernces(getApplicationContext());
             }
 
 
