@@ -138,7 +138,7 @@ public class MainActivity extends Activity {
 //        setupMessageBox();
 //        gotoWebViewDoStart();
         setupDialog();
-
+        setupWebView();
 
     }
 
@@ -421,7 +421,7 @@ public class MainActivity extends Activity {
                     mFlagOnce = false;
                     mStrMainUrl = mWebView.getUrl();
                 }
-                setToken();
+//                setToken();
                 Log.d(TAG, "onPageFinished: "+ mWebView.getUrl());
 
             }
@@ -920,7 +920,7 @@ public class MainActivity extends Activity {
         if (wakeLock != null) {
             wakeLock.acquire();
         }
-        setupWebView();
+
 
         setCustomContent();
 
@@ -1011,33 +1011,11 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public String getToken() {
-            return "111111111";
+            return MySharedPrefernces.getToken(getApplicationContext());
 
         }
     }
 
-    private void setToken() {
-        Log.d(TAG, "setToken: ");
-
-        if (mWebView != null) {
-            String token = MySharedPrefernces.getToken(getApplicationContext());
-            Log.d(TAG, "setToken: " + token);
-
-            if (!token.equals("")) {
-                String jsMethodName = "javascript:setToken('" + token + "')";
-                mWebView.evaluateJavascript(jsMethodName, new ValueCallback<String>() {
-                    @Override
-                    public void onReceiveValue(String s) {
-                        Log.d(TAG, "onReceiveValue: "+s);
-//
-                    }
-                });
-            }
-
-        }
-
-
-    }
 
     private void setCustomContent() {
         String customContent = MySharedPrefernces.getCustomcontent(getApplicationContext());

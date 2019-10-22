@@ -30,6 +30,8 @@ android {
 
             com.app.android.gcx20
 
+            com.android.cp.v1
+
         */
         applicationId "com.app.android.gc04"
         minSdkVersion 19
