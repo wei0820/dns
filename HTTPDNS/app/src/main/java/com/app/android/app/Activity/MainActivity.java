@@ -59,9 +59,6 @@ import com.app.android.app.Common.OnCallbackListener;
 import com.app.android.app.Dialog.DialogConfirm;
 import com.app.android.app.R;
 import com.google.gson.Gson;
-import com.tencent.android.tpush.XGIOperateCallback;
-import com.tencent.android.tpush.XGPushConfig;
-import com.tencent.android.tpush.XGPushManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -141,7 +138,6 @@ public class MainActivity extends Activity {
 //        setupMessageBox();
 //        gotoWebViewDoStart();
         setupDialog();
-        setupWebView();
 
 
     }
@@ -270,8 +266,6 @@ public class MainActivity extends Activity {
         mWebView = findViewById(R.id.webwiew);
         mWebView.setHorizontalScrollBarEnabled(false);
         mWebView.setVerticalScrollBarEnabled(false);
-
-
         WebSettings webSetting = mWebView.getSettings();
         webSetting.setJavaScriptEnabled(true);
         webSetting.setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -287,14 +281,32 @@ public class MainActivity extends Activity {
         webSetting.setDomStorageEnabled(true);
 
         webSetting.setBuiltInZoomControls(true);
+        // TODO: 2019-10-22 待測試
+        // 清缓存和记录，缓存引起的白屏
+        mWebView.clearCache(true);
+        mWebView.clearHistory();
 
+        mWebView.requestFocus();
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setDatabaseEnabled(true);
+// 缓存白屏
+        String appCachePath = getApplicationContext().getCacheDir()
+                .getAbsolutePath() + "/webcache";
+// 设置 Application Caches 缓存目录
+        webSettings.setAppCachePath(appCachePath);
+        webSettings.setDatabasePath(appCachePath);
+        webSettings.setDomStorageEnabled(true);
+
+        webSetting.setAppCacheEnabled(false);
+
+        mWebView.addJavascriptInterface(new WebAppInterface(), "Android");
+        mWebView.getSettings().setDomStorageEnabled(true);
         //  这个是锅。
         //  这个是锅。
         //  这个是锅。
         //  这个是锅。
         //  会导致无法打开新的窗口，这里需要注意。11
         //  webSetting.setSupportMultipleWindows(true);
-        webSetting.setAppCacheEnabled(true);
         webSetting.setGeolocationEnabled(true);
         webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
         webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
@@ -409,9 +421,9 @@ public class MainActivity extends Activity {
                     mFlagOnce = false;
                     mStrMainUrl = mWebView.getUrl();
                 }
-
-                Log.d(TAG, "onPageFinished: "+ mWebView.getUrl());
                 setToken();
+                Log.d(TAG, "onPageFinished: "+ mWebView.getUrl());
+
             }
 
 
@@ -501,8 +513,8 @@ public class MainActivity extends Activity {
             }
         });
         //mWebView.loadUrl("http://52.175.50.221");
-        mWebView.loadUrl(URL);
 
+        mWebView.loadUrl(URL);
 
     }
 
@@ -908,6 +920,8 @@ public class MainActivity extends Activity {
         if (wakeLock != null) {
             wakeLock.acquire();
         }
+        setupWebView();
+
         setCustomContent();
 
     }
@@ -992,34 +1006,30 @@ public class MainActivity extends Activity {
 
     private static final String TAG = "MainActivity";
 
-    public class JavaScriptinterface {
-        Context context;
+    public class WebAppInterface {
 
-        public JavaScriptinterface(Context c, WebView mWebView) {
-            context = c;
-        }
 
         @JavascriptInterface
-        public void onSumResult() {
-            Log.d(TAG, "onSumResult: ");
-            Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
+        public String getToken() {
+            return "111111111";
 
         }
     }
 
     private void setToken() {
+        Log.d(TAG, "setToken: ");
+
         if (mWebView != null) {
             String token = MySharedPrefernces.getToken(getApplicationContext());
-            if (!token.isEmpty()) {
-                Log.d(TAG, "setToken: " + token);
+            Log.d(TAG, "setToken: " + token);
+
+            if (!token.equals("")) {
                 String jsMethodName = "javascript:setToken('" + token + "')";
                 mWebView.evaluateJavascript(jsMethodName, new ValueCallback<String>() {
                     @Override
                     public void onReceiveValue(String s) {
                         Log.d(TAG, "onReceiveValue: "+s);
-                        if (!s.equals("0")){
-                          MySharedPrefernces.saveToken(getApplicationContext(),"");
-                        }
+//
                     }
                 });
             }
@@ -1031,7 +1041,9 @@ public class MainActivity extends Activity {
 
     private void setCustomContent() {
         String customContent = MySharedPrefernces.getCustomcontent(getApplicationContext());
-        if (!customContent.isEmpty()) {
+        Log.d(TAG, "setCustomContent: " + customContent);
+
+        if (!customContent.equals("")) {
             Log.d(TAG, "setCustomContent: " + customContent);
             String url = "";
             CustomContentData customContentData = new Gson().fromJson(customContent,CustomContentData.class);
@@ -1042,16 +1054,25 @@ public class MainActivity extends Activity {
                         ///chat/user/190
                        url = URL_JUMP+"/chat/user/"+customContentData.id;
                         mWebView.loadUrl(url);
+                        MySharedPrefernces.clearSharedPrefernces(getApplicationContext());
+
                         break;
                     case "notification":
                         ///letter?ID=190
                         url = URL_JUMP+"/letter?ID="+customContentData.id;
                         mWebView.loadUrl(url);
+                        MySharedPrefernces.clearSharedPrefernces(getApplicationContext());
+
                         break;
                 }
             }
+        }else {
+            Log.d(TAG, "setCustomContent: " + "is null");
+
+            mWebView.loadUrl(URL);
         }
     }
+
 }
 
 
